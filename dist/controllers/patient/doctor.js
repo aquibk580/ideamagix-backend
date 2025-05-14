@@ -4,12 +4,12 @@ import { ObjectId } from "mongodb";
 // Get all doctors
 export async function getAllDoctors(req, res) {
     try {
-        const docters = await db.doctor.findMany({});
-        if (docters.length === 0) {
-            res.status(404).json({ error: "Docters not available" });
+        const doctors = await db.doctor.findMany({});
+        if (doctors.length === 0) {
+            res.status(404).json({ error: "Doctors not available" });
             return;
         }
-        res.status(200).json(docters);
+        res.status(200).json(doctors);
         return;
     }
     catch (error) {
