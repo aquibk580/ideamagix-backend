@@ -11,12 +11,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "app.js"
-    },
-    {
       "src": "/static/(.*)",
       "dest": "/frontend/dist/static/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "app.js"
     },
     {
       "src": "/(.*)",
