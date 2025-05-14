@@ -24,7 +24,7 @@ app.use("/api/doctor", docterRoutes);
 app.use("/api/patient", patientRoutes);
 // Serve static files from the frontend build directory
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.get("/:wildCard", (req, res) => {
+app.get(/^\/(?!api).*/, (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
 });
 app.listen(PORT, (err) => {
