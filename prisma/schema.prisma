@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+ output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Doctor {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  email         String         @unique
+  phone         String         @unique
+  password      String
+  profileImage  String
+  specialty     String
+  experience    Float
+  consultations Consultation[]
+}
+
+model Patient {
+  id             String         @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String         @unique
+  phone          String         @unique
+  password       String
+  profileImage   String
+  age            Int
+  surgeryHistory String?
+  illnessHistory String?
+  consultations  Consultation[]
+}
+
+enum DiabetesStatus {
+  Diabetics
+  NonDiabetics
+}
+
+model Consultation {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  patientId      String        @db.ObjectId
+  doctorId       String        @db.ObjectId
+  step1Illness   String
+  step1Surgery   String
+  diabetesStatus DiabetesStatus
+  allergies      String
+  others         String
+  paymentTxnId   String
+  Doctor         Doctor        @relation(fields: [doctorId], references: [id])
+  Patient        Patient       @relation(fields: [patientId], references: [id])
+  prescription   Prescription? @relation(fields: [prescriptionId], references: [id])
+  prescriptionId String?       @db.ObjectId
+}
+
+model Prescription {
+  id             String         @id @default(auto()) @map("_id") @db.ObjectId
+  consultationId String
+  care           String
+  medicines      String
+  pdfUrl         String?
+  sent           Boolean        @default(false)  
+  Consultation   Consultation[] 
+}
