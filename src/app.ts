@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, NextFunction, Request, Response } from "express";
 import docterRoutes from "./routes/docter/index.js";
 import patientRoutes from "./routes/patient/index.js";
 import authRoutes from "./routes/auth.js";
@@ -29,11 +29,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/doctor", docterRoutes);
 app.use("/api/patient", patientRoutes);
 
+// Serve static files from the frontend build directory
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-app.get("*", (req, res) => {
-  if (req.path.startsWith("/api")) return;
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
 });
 
 app.listen(PORT, (err) => {
