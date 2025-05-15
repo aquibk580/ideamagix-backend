@@ -75,7 +75,6 @@ async function signup(req: Request, res: Response): Promise<void> {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      path:"/"
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -140,7 +139,6 @@ async function signin(req: Request, res: Response): Promise<void> {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      path:"/",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -163,7 +161,6 @@ function logout(req: Request, res: Response) {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    path: "/",
   });
   res.status(200).json({ message: "Logged out successfully" });
 }
