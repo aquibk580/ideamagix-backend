@@ -5,6 +5,8 @@ import authRoutes from "./routes/auth.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import morgan from "morgan";
+import { config } from "dotenv"  
+config();
 
 const PORT = 8000;
 const app: Express = express();
