@@ -72,8 +72,8 @@ async function signup(req: Request, res: Response): Promise<void> {
 
     res.cookie("doctorToken", token, {
       httpOnly: true,
-      secure: true, // Always use secure: true when using SameSite: "None"
-      sameSite: "None", // Required for cross-site cookies
+      secure: true, 
+      sameSite: "none", 
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -133,8 +133,8 @@ async function signin(req: Request, res: Response): Promise<void> {
 
     res.cookie("doctorToken", token, {
       httpOnly: true,
-      secure: true, // Always use secure: true when using SameSite: "None"
-      sameSite: "None", // Required for cross-site cookies
+      secure: true, 
+      sameSite: "none", 
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -155,8 +155,8 @@ async function signin(req: Request, res: Response): Promise<void> {
 function logout(req: Request, res: Response) {
   res.clearCookie("doctorToken", {
     httpOnly: true,
-    secure: true, // Always use secure: true when using SameSite: "None"
-    sameSite: "None", // Required for cross-site cookies
+    secure: true,
+    sameSite: "none", 
   });
   res.status(200).json({ message: "Logged out successfully" });
 }
